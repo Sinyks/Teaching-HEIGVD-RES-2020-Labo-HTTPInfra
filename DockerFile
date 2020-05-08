@@ -17,3 +17,6 @@ COPY src/ /var/www/html/
 # docker inspect lenomducontainer(docker ps)
 # info du container, chercher le champ "IPAddress:"
 # "IPAddress": "172.17.0.2"
+
+# exploration de l'image
+# docker exec -it 

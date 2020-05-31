@@ -14,6 +14,6 @@ $(() => {
     });
 
   }
-  // on va ré-éxécuter notre fonction toute les 2 secondes 
+  // on va ré-éxécuter notre fonction toute les 2 secondes
   setInterval(getPerson,2000);
 });

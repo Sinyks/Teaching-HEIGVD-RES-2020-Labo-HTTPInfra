@@ -1,0 +1,8 @@
+# http:
+#   routers:
+#     routerfoo:
+#       rule: "Host(`sacha.site.com`) && Path(`/`)"
+#       service:
+#
+#     routerbar:
+#       rule: "Host(`snitest.com`) && Path(`/bar`)"

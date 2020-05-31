@@ -7,8 +7,11 @@ services:
     container_name: reverse-proxy
     # Enables the web UI and tells Traefik to listen to docker
     command:
-      - --api.insecure=true
-      - --providers.docker
+      - "--api.insecure=true"
+      - "--providers.docker"
+      # Do not expose containers unless explicitly told so
+      - "--providers.docker.exposedbydefault=false"
+      - "--ping=true"
       # - --providers.file.filename=/dynamic.yml
     ports:
       # The HTTP port
@@ -17,24 +20,22 @@ services:
       - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       # - ./reverse-proxy/conf/dynamic.yml:/dynamic.yml
 
-  # whoami:
-  #   container_name: testing-traefik
-  #   # A container that exposes an API to show its IP address
-  #   image: containous/whoami
-  #   labels:
-  #     - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
   dynamic-server:
     container_name: dynamic-app
     # Notre container pour les accès dynamique
     build: ./dynamic-server
     labels:
-      - "traefik.http.routers.dynamic-server.rule=Host(`sacha.site.com`) && Path(`/persons/`)"
+      - "traefik.enable=true"
+      - "traefik.http.routers.dynamic-server.rule=Path(`/persons/`)"
+      - "traefik.http.routers.dynamic-server.priority=2"
 
   static-server:
     container_name: static-app
     build: ./static-server
     labels:
-      - "traefik.http.routers.static-server.rule=Host(`sacha.site.com`) && PathPrefix(`/`)"
+      - "traefik.enable=true"
+      - "traefik.http.routers.static-server.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.static-server.priority=1"

@@ -33,8 +33,8 @@ On peut observer les l'alternance entre les deux service que notre reverse proxy
 
 ![](./images/loadbalancing.png)
 
-## Annexe la configuration de treafik
+## Annexe: la configuration de treafik
 
-Treafik est configurable de plusieurs manières, on peut spécifier certaine propriété lié dans un fichier ``.toml`` ou ``.yml`` ou bien, ce que nous avons fait dans ce labo, spécifier les paramètre au lancement du container Treafik via le champ ``commande`` et les propriété lié au différent noeuds via le champ ``label`` (ce n'est évidemment pas recommandé si l'on a une configuration conséquente à appliquer).
+Traefik est configurable de plusieurs manières, on peut spécifier certaine propriété lié dans un fichier ``.toml`` ou ``.yml`` ou bien, ce que nous avons fait dans ce labo, spécifier les paramètre au lancement du container Treafik via le champ ``commande`` et les propriété lié au différent noeuds via le champ ``label`` (ce n'est évidemment pas recommandé si l'on a une configuration conséquente à appliquer).
 
-Pour le LoadBalancing treafik nous mâche le travail car il est capable de reconnaître les containers issue d'une même image et nous les regroupera en un seul service. On peut même y accéder à une interface web pour visualiser la configuration (accessible via ``http://localhost:8080``). 
+Pour le LoadBalancing treafik nous mâche le travail car il est capable de reconnaître les containers issue d'une même image et nous les regroupera en un seul service. On peut même y accéder à une interface web pour visualiser la configuration (accessible via ``http://localhost:8080``).

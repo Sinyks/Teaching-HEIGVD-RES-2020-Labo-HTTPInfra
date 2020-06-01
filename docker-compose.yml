@@ -36,3 +36,17 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.static-server.rule=PathPrefix(`/`)"
       - "traefik.http.routers.static-server.priority=1"
+
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:

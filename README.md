@@ -62,3 +62,5 @@ $(() => {
 });
 
 ```
+
+Ainsi notre page statique sera agrémenté de nom mis à jours toutes les 2 secondes, on peut aussi observer les requêtes depuis l'onglet développeur de notre navigateur favoris.

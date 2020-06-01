@@ -23,16 +23,19 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   dynamic-server:
-    # Notre container pour les accès dynamique
+    # Notre container pour notre api dynamique
     build: ./dynamic-server
     labels:
+      # la configuration de ce service pour traefik
       - "traefik.enable=true"
       - "traefik.http.routers.dynamic-server.rule=Path(`/persons/`)"
       - "traefik.http.routers.dynamic-server.priority=2"
 
   static-server:
+    # Notre container pour le site static
     build: ./static-server
     labels:
+      # la configuration de ce service pour traefik
       - "traefik.enable=true"
       - "traefik.http.routers.static-server.rule=PathPrefix(`/`)"
       - "traefik.http.routers.static-server.priority=1"

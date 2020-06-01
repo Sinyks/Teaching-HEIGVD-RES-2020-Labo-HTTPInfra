@@ -38,7 +38,7 @@ Pour inscrire les adresses dans notre fichier de configuration, nous allons util
 
 ### Passage des variables d'environnement
 
-Dans le fichier ``buildAndrun.sh``, on piocher les adresses IP des containers intéressant en exécution via:
+Dans le fichier ``buildAndrun.sh``, nous allons piocher les adresses IP des containers en exécution via:
 
 ```bash
 ip_Static=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $staticContainerName)
@@ -49,4 +49,4 @@ docker run -d -e HTTP_STATIC=${ip_Static}:80 -e HTTP_DYNAMIQUE=${ip_Dynamic}:300
 
 ### Démonstration
 
-Nous nous déplaçons dans les répertoires ``/stepX`` et lançons individuellement les scripts ``buildAndRun.sh`` correspondants. Un navigateur va apparaître et afficher le contenu statique et dynamique à la fin du 3<sup>ème</sup> script.
+Nous nous déplaçons dans les répertoires ``/stepX`` et lançons individuellement les scripts ``buildAndRun.sh`` correspondants dans l'ordre. Un navigateur va apparaître et afficher le contenu statique et dynamique à la fin du 3<sup>ème</sup> script.

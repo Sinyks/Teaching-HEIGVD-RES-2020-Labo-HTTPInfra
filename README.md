@@ -4,13 +4,12 @@
 Author : Sacha Perdrizat, Pablo Mercado
 ```
 
-## Step 5: Dynamic reverse proxy configuration
+## Step 6 Extra: LoadBalancing
 
-Notre reverse proxy est actuellement configuré avec des adresses statique, ce qui signifie que les adresses doivent être manuellement inscrite sur notre fichier de configuration, cette tâche se doit d'être automatisé.
+Dans cette étape bonus nous allons configurer un Loadbalancer pour permettre la répartition des requêtes à travers plusieurs noeud applicatif.
 
-### Variables d'environnement à l'exécution
-Nous pouvons utiliser des variable d'environnement que l'on va transférer à notre container et qui existerons toute la vie du container durant.
+### Traefik
+Nous allons pour ce faire changer notre infrastructure dès maintenant pour découvrir un nouveau reverse proxy ``Traefik``. Traefik possède beaucoup de fonctionnalités très pertinentes pour la gestion des noeud, la principal étant qu'il est conçu pour s'intégrer très simplement avec docker (la configuration des noeud est automatique). Nous aurons besoin d'un autre outil docker-compose.
 
-### script PHP
-
-Pour générer les adresses dans notre fichier de configuration nous allons utiliser un script PHP ainsi (simple d'utilisation et déjà disponible sur notre container).
+### docker-compose
+Très brièvement, docker-compose nous permet de définir dans un fichier ``docker-compose.yml`` un équivalent des commande que nous écrirons au lancement d'un container, cela nous épargne la tâche d'avoir à stocker le lancement du container dans un script mais surtout il est possible de définir plusieurs lancement de container dans le même fichier.

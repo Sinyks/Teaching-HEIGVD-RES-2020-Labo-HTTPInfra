@@ -3,7 +3,7 @@ version: '3.7'
 services:
   reverse-proxy:
     # The official v2 Traefik docker image
-    build: ./reverse-proxy
+    image: traefik:v2.2
     container_name: reverse-proxy
     # Enables the web UI and tells Traefik to listen to docker
     command:
@@ -12,7 +12,7 @@ services:
       # Do not expose containers unless explicitly told so
       - "--providers.docker.exposedbydefault=false"
       - "--ping=true"
-      # - --providers.file.filename=/dynamic.yml
+      - "--accesslog=true"
     ports:
       # The HTTP port
       - "80:80"
@@ -21,10 +21,8 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      # - ./reverse-proxy/conf/dynamic.yml:/dynamic.yml
 
   dynamic-server:
-    container_name: dynamic-app
     # Notre container pour les accès dynamique
     build: ./dynamic-server
     labels:
@@ -33,7 +31,6 @@ services:
       - "traefik.http.routers.dynamic-server.priority=2"
 
   static-server:
-    container_name: static-app
     build: ./static-server
     labels:
       - "traefik.enable=true"
